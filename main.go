@@ -3,9 +3,13 @@ package main
 import "net/http"
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, World!"))
-	})
+	// show the index.html file
+	http.Handle("/", http.FileServer(http.Dir("./")))
+	// show the index.html file
+	http.Handle("/index.html", http.FileServer(http.Dir("./")))
+
+	// show the index.html file
+	http.Handle("/index", http.FileServer(http.Dir("./")))
 
 	http.ListenAndServe(":8080", nil)
 
